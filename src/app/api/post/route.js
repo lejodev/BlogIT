@@ -11,11 +11,11 @@ export async function GET() {
         if (posts) {
             return NextResponse.json(posts, { status: 200 })
         } else {
-            return NextResponse.json({ "Message": "No posts available" })
+            return NextResponse.json({ "Message": "No posts available" }, { status: 400 })
         }
     } catch (error) {
-        return NextResponse.json({ "Message": error })
-    }s
+        return NextResponse.json(error, { status: 400 })
+    }
 }
 
 export async function POST(req, { params }) {
