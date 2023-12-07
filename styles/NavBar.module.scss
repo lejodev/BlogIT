@@ -1,0 +1,40 @@
+.navBar {
+  background-color: white;
+  height: 9vh;
+  background: lightcoral;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+//   position: fixed;
+  .nav {
+    // display: flex;
+    .links {
+      display: flex;
+      list-style: none;
+    }
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .navBar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    .nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .links {
+        display: flex;
+        list-style: none;
+      }
+      .burger {
+        width: 20px;
+        height: 20px;
+        background-color: black;
+      }
+    }
+  }
+}

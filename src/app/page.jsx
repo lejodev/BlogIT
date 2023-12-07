@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "@/../styles/home.module.scss";
+import Image from "next/image";
+import PostCard from "../../components/PostCard";
 
 async function getPosts() {
   const res = await fetch("http://localhost:3000/api/post");
@@ -25,13 +27,12 @@ const Home = async () => {
     <div className={styles.main}>
       <section className={styles.recent_posts}>
         {posts.map((post, index) => (
-          <div
-            className={styles[`post${index + 1}`]}
+          <PostCard
+            index={index}
+            title={post.title}
+            text={post.text}
             key={post._id}
-          >
-            <div className={styles.title}>{post.title}</div>
-            <div className={styles.text}>{post.text}</div>
-          </div>
+          />
         ))}
       </section>
     </div>
