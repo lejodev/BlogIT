@@ -1,26 +1,77 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import styles from "@/../styles/NavBar.module.scss";
+import { useState } from "react";
 
 const NavBar = () => {
+  const [showMenu, setshowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setshowMenu(!showMenu);
+  };
+
   return (
     <div className={styles.navBar}>
       {/* This will be a logo */}
-      <Link href="/">BlogIT</Link>
+      <Link
+        className={styles.logo_link}
+        href="/"
+        onClick={() => {
+          setshowMenu(false);
+        }}
+      >
+        BlogIT
+      </Link>
       <nav className={styles.nav}>
-        <ul className={styles.links}>
+        <ul
+          className={
+            showMenu ? `${styles.links} ${styles.show_links}` : styles.links
+          }
+        >
           <li className={styles.link_container}>
-            <Link href="/">Company</Link>
+            <Link
+              className={styles.link}
+              href="/company"
+              onClick={() => {
+                setshowMenu(false);
+              }}
+            >
+              Company
+            </Link>
           </li>
           <li className={styles.link_container}>
-            <Link href="/">Products</Link>
+            <Link
+              className={styles.link}
+              href="/products"
+              onClick={() => {
+                setshowMenu(false);
+              }}
+            >
+              Products
+            </Link>
           </li>
           <li className={styles.link_container}>
-            <Link href="/">About</Link>
+            <Link
+              className={styles.link}
+              href="/about"
+              onClick={() => {
+                setshowMenu(false);
+              }}
+            >
+              About
+            </Link>
           </li>
         </ul>
-        <div className={styles.burger}></div>
       </nav>
+      <div
+        className={styles.burger}
+        onClick={() => {
+          console.log("CARECHIMBA");
+          toggleMenu();
+        }}
+      ></div>
     </div>
   );
 };
