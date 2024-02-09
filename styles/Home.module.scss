@@ -1,81 +1,47 @@
 .main {
   width: 100%;
-  height: 110vh;
-  display: flex;
-  flex-flow: column;
-  // overflow-x: hidden;
   .info_all_posts {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
-    .title {
-      margin: 0;
-    }
+    // .title {
+    // }
     .all_posts_link {
+      cursor: pointer;
       text-decoration: none;
     }
   }
   .recent_posts {
-    display: flex;
-    flex-flow: column;
-    justify-content: flex-start;
-    .post_card {
-      // height: 110vh;
-      margin-bottom: 25px;
-      text-decoration: none;
-      color: #000;
-      cursor: pointer;
-      .image {
-        width: 100%;
-        height: 45vw;
-        background-color: lightblue;
-      }
-      .text {
-        min-height: 100px;
-        background-color: cadetblue;
-        overflow: hidden;
-        box-sizing: border-box;
-      }
-    }
+    width: 100%;
+    height: 110vh;
+    display: grid;
+    grid-template-areas:
+      "featured featured"
+      "post2 post1";
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
 }
 
 @media screen and (min-width: 990px) {
   .main {
-    flex-flow: column;
-    // background-color: red;
-    height: 110vh;
     .recent_posts {
-      height: 100%;
-      display: grid;
-      column-gap: 20px;
-      row-gap: 20px;
       grid-template-areas:
-        "main no_main1"
-        "main no_main2";
+        "featured featured post2"
+        "featured featured post1";
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 1fr);
-      grid-template-columns: 3fr 1fr;
-      .post_card {
-        // padding: 10px;
-        .image {
-          width: 100%;
-          height: 70%;
-          box-sizing: border-box;
-        }
-        .text {
-          height: unset;
-        }
-      }
       .post1 {
-        grid-area: main;
-      }
-      .post2 {
-        grid-area: no_main1;
-      }
-      .post3 {
-        grid-area: no_main2;
+        background-color: red;
+        .image {
+          background-color: red;
+        }
       }
     }
   }
+}
+.post1 {
+  display: none;
 }

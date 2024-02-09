@@ -7,7 +7,7 @@ export async function GET(req, { params }) {
         databaseConnect()
         const { userId } = params // Destructring
         const userPosts = await Post.find({ author: userId })
-        console.log(userPosts)
+        // console.log(userPosts)
         if (userPosts) {
             return NextResponse.json({ userPosts }, { status: 200 })
         } else {

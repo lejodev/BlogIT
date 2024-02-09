@@ -25,7 +25,7 @@ export async function PATCH(req, { params }) {
         const postId = params.postId;
         const newPost = await req.json()
         const updatePost = await Post.findByIdAndUpdate(postId, newPost, { new: true })
-        console.log(updatePost)
+        // console.log(updatePost)
         if (updatePost) {
             return NextResponse.json({
                 Message: "Post updated successfully",

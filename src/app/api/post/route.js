@@ -5,9 +5,9 @@ import Post from "@/models/Post"
 export async function GET() {
     try {
         databaseConnect()
-        console.log("")
+        // console.log("")
         const posts = await Post.find()
-        console.log(posts)
+        // console.log(posts)
         if (posts) {
             return NextResponse.json(posts, { status: 200 })
         } else {
@@ -28,6 +28,6 @@ export async function POST(req, { params }) {
         return NextResponse.json({ "message": "Post created succeessfully" }, { status: 200 })
     } catch (error) {
         console.log(error)
-        return NextResponse.json({ "Message": error }, { status: 400 })
+        return NextResponse.json({ "Message": "CARECHIMBA" }, { status: 400 })
     }
 }

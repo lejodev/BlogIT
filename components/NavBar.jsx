@@ -1,12 +1,20 @@
-"use client";
+// "use client";
 
-import React from "react";
+// import React, { useEffect } from "react";
+// import { useSession } from "next-auth/react";
+// import {cookies} from "next/headers"
+// import { getCookies } from "cookies-next";
 import Link from "next/link";
 import styles from "@/../styles/NavBar.module.scss";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+// import { getServerSession } from "next-auth";
 
-const NavBar = () => {
+function NavBar() {
   const [showMenu, setshowMenu] = useState(false);
+
+  const { data: session } = useSession();
+  console.log("=============", session);
 
   const toggleMenu = () => {
     setshowMenu(!showMenu);
@@ -24,12 +32,12 @@ const NavBar = () => {
       >
         BlogIT
       </Link>
-      <nav className={styles.nav}>
-        <ul
-          className={
-            showMenu ? `${styles.links} ${styles.show_links}` : styles.links
-          }
-        >
+      <nav
+        className={
+          showMenu ? `${styles.links} ${styles.show_links}` : styles.links
+        }
+      >
+        <ul className={styles.menu}>
           <li className={styles.link_container}>
             <Link
               className={styles.link}
@@ -63,6 +71,51 @@ const NavBar = () => {
               About
             </Link>
           </li>
+          {session ? (
+            session.user.role === "writer" ? (
+              <li className={styles.link_container}>
+                <Link
+                  className={styles.link}
+                  href="/create"
+                  onClick={() => {
+                    setshowMenu(false);
+                  }}
+                >
+                  create
+                </Link>
+              </li>
+            ) : (
+              false
+            )
+          ) : (
+            false
+          )}
+
+          {session ? (
+            <li className={styles.link_container}>
+              <Link
+                className={styles.link}
+                href="/api/auth/signout"
+                onClick={() => {
+                  setshowMenu(false);
+                }}
+              >
+                Signout
+              </Link>
+            </li>
+          ) : (
+            <li className={styles.link_container}>
+              <Link
+                className={styles.link}
+                href="/api/auth/signin"
+                onClick={() => {
+                  setshowMenu(false);
+                }}
+              >
+                Signin
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
       <div
@@ -74,6 +127,6 @@ const NavBar = () => {
       ></div>
     </div>
   );
-};
+}
 
 export default NavBar;

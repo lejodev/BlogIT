@@ -1,18 +1,24 @@
 "use client";
 import React from "react";
-import styles from "../styles/home.module.scss";
+import styles from "../styles/postcard.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const PostCard = (props) => {
-  const redirectPost = (postId) => {
-    alert(postId);
-  };
+  const [styleName, setstyleName] = useState("");
+
+  useEffect(() => {
+    setstyleName(props.index);
+  }, []);
+
+  const name = "post." + props.index;
+  const naamee = `${styles[`${name}`]}`;
 
   return (
     <Link
       href={`/post/${props.id}`}
-      className={`${styles[`post${props.index + 1}`]} ${styles.post_card}`}
+      className={`${styles.post_card} ${styles["post" + props.index]}`}
       // onClick={() => {
       //   redirectPost(props.id);
       // }}

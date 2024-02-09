@@ -1,7 +1,8 @@
 "use client";
-
 import React from "react";
 import { useState, useEffect } from "react";
+import styles from "../../../styles/posts.module.scss";
+import PostCard from "../../../components/PostCard";
 
 const page = () => {
   const [posts, setPosts] = useState(null);
@@ -11,17 +12,22 @@ const page = () => {
     fetch("/api/post")
       .then((res) => res.json())
       .then((posts) => {
-        console.log(posts);
+        // console.log(posts);
         setPosts(posts);
-        setLoading(false)
+        setLoading(false);
       });
   }, []);
 
   if (loading) return <>LOADING...</>;
   return (
-    <div>
-      {posts.map((post) => (
-        <div>{post.title}</div>
+    <div className={styles.posts_all}>
+      {posts.map((post, index) => (
+        <PostCard
+          title={post.title}
+          text={post.text}
+          key={post._id}
+          id={post._id}
+        />
       ))}
     </div>
   );
