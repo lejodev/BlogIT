@@ -18,6 +18,8 @@ async function getPosts() {
   }
 }
 
+//   ============            IMPORT HOME COMPONENT HERE... ALWAYS S.O.L.I.D            ============
+
 const Home = async () => {
   const posts = await getPosts();
   console.log(posts);

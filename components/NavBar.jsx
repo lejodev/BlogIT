@@ -4,21 +4,21 @@ import Link from "next/link";
 const NavBar = () => {
   return (
     <div>
-        NAVBAR
-      {/* This will be a logo */}
-      {/* <Link>BlogIT</Link> */}
+      {/* NAVBAR */}
+      This will be a logo
+      <Link href="/">BlogIT</Link>
       <nav>
-        {/* <ul>
+        <ul>
           <li>
-            <Link>Company</Link>
+            <Link href="/blog">BLOG</Link>
           </li>
           <li>
-            <Link>Products</Link>
+            <Link href="/contact">CONTACT</Link>
           </li>
           <li>
-            <Link>About</Link>
+            <Link href="about">ABOUT</Link>
           </li>
-        </ul> */}
+        </ul>
       </nav>
     </div>
   );
