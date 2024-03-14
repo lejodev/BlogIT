@@ -74,6 +74,11 @@
         display: flex;
         .link_container {
           background-color: unset;
+          .link {
+            .menu_title{
+              white-space: nowrap;
+            }
+          }
         }
       }
     }

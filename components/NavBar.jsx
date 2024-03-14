@@ -8,6 +8,8 @@ import Link from "next/link";
 import styles from "@/../styles/NavBar.module.scss";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import Modal from "./Modal";
 // import { getServerSession } from "next-auth";
 
 function NavBar() {
@@ -107,12 +109,12 @@ function NavBar() {
             <li className={styles.link_container}>
               <Link
                 className={styles.link}
-                href="/api/auth/signin"
+                href="/register"
                 onClick={() => {
                   setshowMenu(false);
                 }}
               >
-                Signin
+                <span className={styles.menu_title}>Log In</span>
               </Link>
             </li>
           )}
@@ -121,7 +123,6 @@ function NavBar() {
       <div
         className={styles.burger}
         onClick={() => {
-          console.log("CARECHIMBA");
           toggleMenu();
         }}
       ></div>
