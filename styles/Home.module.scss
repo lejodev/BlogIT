@@ -1,27 +1,47 @@
 .main {
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-flow: row;
-  background-color: red;
-  .recent_posts {
-    display: grid;
-    grid-template-areas:
-      "main no_main1"
-      "main no_main2";
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: 3fr 1fr;
-    .post1 {
-      grid-area: main;
-      background-color: blue;
-    }
-    .post2 {
-      grid-area: no_main1;
-      background-color: red;
-    }
-    .post3 {
-      grid-area: no_main2;
-      background-color: green;
+  .info_all_posts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // .title {
+    // }
+    .all_posts_link {
+      cursor: pointer;
+      text-decoration: none;
     }
   }
+  .recent_posts {
+    width: 100%;
+    height: 110vh;
+    display: grid;
+    grid-template-areas:
+      "featured featured"
+      "post2 post1";
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .main {
+    .recent_posts {
+      grid-template-areas:
+        "featured featured post2"
+        "featured featured post1";
+      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      .post1 {
+        background-color: red;
+        .image {
+          background-color: red;
+        }
+      }
+    }
+  }
+}
+.post1 {
+  display: none;
 }
