@@ -40,28 +40,8 @@ function NavBar() {
         }
       >
         <ul className={styles.menu}>
-          <li className={styles.link_container}>
-            <Link
-              className={styles.link}
-              href="/company"
-              onClick={() => {
-                setshowMenu(false);
-              }}
-            >
-              Company
-            </Link>
-          </li>
-          <li className={styles.link_container}>
-            <Link
-              className={styles.link}
-              href="/products"
-              onClick={() => {
-                setshowMenu(false);
-              }}
-            >
-              Products
-            </Link>
-          </li>
+          {" "}
+          {/*<!--Map over links and simplify it-->*/}
           <li className={styles.link_container}>
             <Link
               className={styles.link}
@@ -70,7 +50,10 @@ function NavBar() {
                 setshowMenu(false);
               }}
             >
-              About
+              ABOUT
+            </Link>
+            <Link className={styles.link} href={"contact"}>
+              CONTACT
             </Link>
           </li>
           {session ? (
@@ -83,7 +66,7 @@ function NavBar() {
                     setshowMenu(false);
                   }}
                 >
-                  create
+                  CREATE
                 </Link>
               </li>
             ) : (
@@ -92,7 +75,6 @@ function NavBar() {
           ) : (
             false
           )}
-
           {session ? (
             <li className={styles.link_container}>
               <Link
@@ -102,7 +84,7 @@ function NavBar() {
                   setshowMenu(false);
                 }}
               >
-                Signout
+                SIGNOUT
               </Link>
             </li>
           ) : (
@@ -114,7 +96,7 @@ function NavBar() {
                   setshowMenu(false);
                 }}
               >
-                <span className={styles.menu_title}>Log In</span>
+                <span className={styles.menu_title}>LOG IN</span>
               </Link>
             </li>
           )}

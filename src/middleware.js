@@ -25,18 +25,8 @@ export async function middleware(req) {
     // return NextResponse.rewrite(url);
     return NextResponse.redirect(url);
   }
-
-  //   console.log("End here!");
-  //   console.log(req.cookies);
-  // if (req.cookies) {
-  //     console.log("HASSSS")
-  //     return NextResponse.next()
-  // } else {
-  //     console.log("No cookie provided")
-  //     return NextResponse.redirect(new URL("/api/auth/unauthorized"))
-  // }
 }
 
 export const config = {
-  matcher: ["/company", "/about"],
+  matcher: ["/company"],
 };
