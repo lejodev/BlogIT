@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { parse } from "cookie";
 
 export async function middleware(req) {
-  const currentUser = req.cookies.get("next-auth.session-token");
-  console.log("currentUser", currentUser);
-  const session = req;
-  console.log("FUCCKING SESSION", session);
+  // const currentUser = req.cookies.get("next-auth.session-token");
+  // console.log("currentUser", currentUser);
+  // const session = req;
+  // console.log("FUCCKING SESSION", session);
 
   if (currentUser) {
     console.log("With cookie");
@@ -28,5 +28,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/company"],
+  matcher: ["/company", "/create"],
 };

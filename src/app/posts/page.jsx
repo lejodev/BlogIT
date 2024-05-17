@@ -1,21 +1,18 @@
-"use client";
 import React from "react";
 import { useState, useEffect } from "react";
 import styles from "../../../styles/posts.module.scss";
 import PostCard from "../../../components/PostCard";
+import { getAllPosts } from "../services/posts";
 
 const page = () => {
-  const [posts, setPosts] = useState(null);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    fetch("/api/post")
-      .then((res) => res.json())
-      .then((posts) => {
-        // console.log(posts);
-        setPosts(posts);
-        setLoading(false);
-      });
+    // fetch("/api/post")
+    //   .then((res) => res.json())
+    //   .then((posts) => {
+    //     // console.log(posts);
+    //     setPosts(posts);
+    //     setLoading(false);
+    //   });
   }, []);
 
   if (loading) return <>LOADING...</>;

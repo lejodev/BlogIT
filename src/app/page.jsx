@@ -1,56 +1,32 @@
-"use client";
+// "use client";
 
 import React from "react";
-import styles from "@/../styles/home.module.scss";
-import postStyles from "../../styles/postcard.module.scss";
-import Image from "next/image";
-import PostCard from "../../components/PostCard";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { getAllPosts } from "./services/posts";
+import { Card } from "flowbite-react";
 
-const Home = () => {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    return function getPosts() {
-      fetch("/api/post")
-        .then((res) => res.json())
-        .then((posts) => {
-          if (posts.length > 3) {
-            const lastPosts = posts.slice(-3).reverse();
-            // console.log("LAST POSTS", lastPosts);
-            setPosts(lastPosts);
-          } else {
-            // console.log(posts);
-            setPosts(lastPosts);
-          }
-        })
-        .catch((error) => {
-          throw new Error({ "CARECHIMBA ERROR": error });
-        });
-    };
-  }, []);
+export default async function Home() {
+  const { data } = await getAllPosts();
+  console.log(data);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.info_all_posts}>
-        <h1 className={styles.title}>Most recent posts</h1>
-        <Link className={styles.all_posts_link} href={"/posts"}>
-          View All Posts
-        </Link>
-      </div>
-      <section className={styles.recent_posts}>
-        {posts.map((post, index) => (
-          <PostCard
-            index={index + 1}
-            title={post.title}
-            text={post.text}
-            key={post._id}
-            id={post._id}
-          />
-        ))}
-      </section>
+    <div className="h-screen flex flex-col items-center overflow-auto p-4">
+      {data.map(({ id, attributes }) => {
+        return (
+          <Card
+            className="max-w-sm my-4 h-40 overflow-hidden flex flex-col items-start"
+            imgSrc="/images/blog/image-4.jpg"
+            horizontal
+            key={id}
+          >
+            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {attributes.title}
+            </h5>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              {attributes.content}
+            </p>
+          </Card>
+        );
+      })}
     </div>
   );
-};
-
-export default Home;
+}

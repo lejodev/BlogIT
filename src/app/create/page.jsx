@@ -1,11 +1,10 @@
 import React from "react";
-import Form from "./Form";
-import { useSession } from "next-auth/react";
-const page = async () => {
-  // const { data: session } = useSession();
+import RegisterForm from "../../../components/RegisterForm";
+const page =  () => {
+  // const { data: session } = useSession();s
   return (
-    <div>
-      <Form />
+    <div> PERROHIJUEPUTA
+      {/* <RegisterForm /> */}
     </div>
   );
 };
