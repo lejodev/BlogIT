@@ -1,33 +1,31 @@
-// "use client";
+"use client";
 import React from "react";
-import styles from "../styles/postcard.module.scss";
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { API_URL, POSTS_URL } from "@/app/config";
 
-const PostCard = (props) => {
-  const [styleName, setstyleName] = useState("");
-
-  useEffect(() => {
-    setstyleName(props.index);
-  }, []);
-
-  const name = "post." + props.index;
-  const naamee = `${styles[`${name}`]}`;
-
+const PostCard = ({ post }) => {
+  const url = `${API_URL}${post.attributes.coverImage.data.attributes.url}`;
+  console.log("IMAGEURL", url);
   return (
-    <Link
-      href={`/post/${props.id}`}
-      className={`${styles.post_card} ${styles["post" + props.index]}`}
-      // onClick={() => {
-      //   redirectPost(props.id);
-      // }}
-    >
-      {/* <Image /> */}
-      <div className={styles.image}></div>
-      <div className={styles.title}>{props.title}</div>
-      <div className={styles.text}>{props.text}</div>
-    </Link>
+    <Card className="fixed-height-card">
+      <Card.Img variant="top" src={url} className="fixed-height-card-img" />
+      <Card.Body className="d-flex flex-column">
+        <Card.Title className="flex-shrink-0">
+          {post.attributes.title}
+        </Card.Title>
+        <Card.Text className="flex-grow-1">{post.attributes.content}</Card.Text>
+        <Button
+          variant="primary"
+          className="mt-auto"
+          href={`/posts/${post.id}`}
+        >
+          See post
+        </Button>
+        <Card.Footer>By: John Doe</Card.Footer>
+      </Card.Body>
+    </Card>
   );
 };
 

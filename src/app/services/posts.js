@@ -1,13 +1,32 @@
-import { API_URL } from "../config";
+import { API_URL, COVER_URL, POSTS_URL } from "../config";
+const postsDetail =
+  "?populate[users_permissions_user][fields][0]=username&populate[category][fields][0]=name&populate[coverImage][fields][0]=url";
 export async function getAllPosts() {
-  console.log("**************************",API_URL)
-  const res = await fetch(`${API_URL}/api/blogs?`);
+  const endpoint = `${POSTS_URL}?${COVER_URL}`;
+  const res = await fetch(endpoint);
   const posts = await res.json();
-  console.log(posts.data);
   return posts;
 }
 
+export function getCover({ attributes }) {
+  const { url } = attributes.coverImage.data.attributes;
+  return `${API_URL}${url}`;
+}
 
-export async function getCover() {
-  // const cover = 
+export async function getSInglePost(postId) {
+  const url = `${POSTS_URL}/${postId}${postsDetail}`;
+  const res = await fetch(url);
+  let post = [];
+  if (res.ok) {
+    post = await res.json();
+  }
+  return post;
+}
+
+export async function getPostsByCategory(category) {
+  const res = await fetch(
+    `${POSTS_URL}${postsDetail}&filters[category][name][$eq]=${category}`
+  );
+  const categories = await res.json();
+  return categories;
 }

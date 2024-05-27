@@ -1,13 +1,10 @@
-// "use client";
-import { Inter } from "next/font/google";
-// import Layout from "../../components/Layout";
-import NavBar from "../../components/NavBar";
-// import { SessionProvider } from "next-auth/react";
-// import {NextAuthProvider} from "@/fb96"
+"use client";
 
-import './globals.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import MyNavbar from "../../components/NavBar";
+// import { Inter } from "next/font/google";
+import { useEffect } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata = {
 //   title: "BlogIT",
@@ -15,11 +12,13 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
   return (
     <html>
-      <title>BlogIt</title>
-      <body className={inter.className}>
-        <NavBar />
+      <body>
+        <MyNavbar />
         {children}
       </body>
     </html>

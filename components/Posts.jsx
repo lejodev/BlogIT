@@ -1,11 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { getAllPosts, getCover } from "./services/posts";
+import { useSearchParams } from "next/navigation";
+import { getAllPosts, getCover } from "./../src/app/services/posts";
+
+// import Button from "react-bootstrap/Button";
+// import Card from "react-bootstrap/Card";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 export default function MainPosts() {
   const [posts, setPosts] = useState([]);
+  const searchParams = useSearchParams();
+  const urlParam = searchParams.get("postId");
 
   useEffect(() => {
     async function fetchData() {
@@ -14,7 +20,7 @@ export default function MainPosts() {
 
         const postsWithCovers = await Promise.all(
           data.map(async (post) => {
-            const coverUrl = await getCover(post); // Modify how to get cover. Already comes through link
+            const coverUrl = await getCover(post);
             return { ...post, coverUrl };
           })
         );
@@ -29,7 +35,6 @@ export default function MainPosts() {
   }, []);
 
   return (
-    // Make this a Reusable, SSR grid
     <Container className="d-flex justify-content-center">
       <Row className="main-grid row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {posts.map(({ id, attributes, coverUrl }) => (
@@ -47,7 +52,7 @@ export default function MainPosts() {
                 <Card.Text className="flex-grow-1">
                   {attributes.content}
                 </Card.Text>
-                <Button variant="primary" className="mt-auto">
+                <Button variant="primary" className="mt-auto" href={`/posts/${id}`}>
                   See post
                 </Button>
               </Card.Body>

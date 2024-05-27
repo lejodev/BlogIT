@@ -9,7 +9,6 @@ const RegisterForm = () => {
         name=""
         id="title"
         onChange={(e) => {
-          console.log(e.target.value);
         }}
       />
     </form>
