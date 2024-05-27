@@ -14,9 +14,11 @@ function BasicExample() {
             <Nav.Link href="#home">Blog</Nav.Link>
             <Nav.Link href="#link">About</Nav.Link>
             <NavDropdown title="Hot topics" id="basic-nav-dropdown">
-              <NavDropdown.Item href="categories/ai">AI</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Tech</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Gadgets</NavDropdown.Item>
+              <NavDropdown.Item href="/categories/AI">AI</NavDropdown.Item>
+              <NavDropdown.Item href="/categories/tech">Tech</NavDropdown.Item>
+              <NavDropdown.Item href="/categories/gadgets">
+                Gadgets
+              </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">ALL</NavDropdown.Item>
             </NavDropdown>
