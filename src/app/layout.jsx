@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyNavbar from "../../components/NavBar";
 // import { Inter } from "next/font/google";
 import { useEffect } from "react";
-
+import Footer from "../../components/Footer";
 
 // export const metadata = {
 //   title: "BlogIT",
@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
       <body>
         <MyNavbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

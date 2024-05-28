@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { getAllPosts, getCover } from "./services/posts";
+import { getAllPosts, getCover } from "../services/posts";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 export default function MainPosts() {

@@ -1,14 +1,16 @@
-import React from "react";
-import PostCard from "../components/PostCard";
+import React from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+import PostCard from '../components/PostCard';
 
 const BlogsCarousel = ({ blogs }) => {
   return (
-    <div>
-      {blogs.data.map((blog) => {
-        console.log("BLOOOOG", blog);
-        return <PostCard post={blog} />;
-      })}
-    </div>
+    <Carousel>
+      {blogs.data.map((blog, index) => (
+        <Carousel.Item key={index}>
+          <PostCard post={blog} />
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 };
 
