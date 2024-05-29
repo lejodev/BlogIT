@@ -28,33 +28,33 @@ export default function MainPosts() {
     fetchData();
   }, []);
 
-  return (
+  return (<></>
     // Make this a Reusable, SSR grid
-    <Container className="d-flex justify-content-center">
-      <Row className="main-grid row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {posts.map(({ id, attributes, coverUrl }) => (
-          <Col key={id} className="d-flex justify-content-center">
-            <Card className="fixed-height-card">
-              <Card.Img
-                variant="top"
-                src={coverUrl}
-                className="fixed-height-card-img"
-              />
-              <Card.Body className="d-flex flex-column">
-                <Card.Title className="flex-shrink-0">
-                  {attributes.title}
-                </Card.Title>
-                <Card.Text className="flex-grow-1">
-                  {attributes.content}
-                </Card.Text>
-                <Button variant="primary" className="mt-auto">
-                  See post
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    // <Container className="d-flex justify-content-center">
+    //   <Row className="main-grid row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    //     {posts.map(({ id, attributes, coverUrl }) => (
+    //       <Col key={id} className="d-flex justify-content-center">
+    //         <Card className="fixed-height-card">
+    //           <Card.Img
+    //             variant="top"
+    //             src={coverUrl}
+    //             className="fixed-height-card-img"
+    //           />
+    //           <Card.Body className="d-flex flex-column">
+    //             <Card.Title className="flex-shrink-0">
+    //               {attributes.title}
+    //             </Card.Title>
+    //             <Card.Text className="flex-grow-1">
+    //               {attributes.content}
+    //             </Card.Text>
+    //             <Button variant="primary" className="mt-auto">
+    //               See post
+    //             </Button>
+    //           </Card.Body>
+    //         </Card>
+    //       </Col>
+    //     ))}
+    //   </Row>
+    // </Container>
   );
 }

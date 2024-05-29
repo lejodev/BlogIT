@@ -1,9 +1,5 @@
-import MainPosts from "./../../components/Posts";
+import MainPosts from "../../components/MainPosts";
 
 export default function Home() {
-  return (
-    <div className="">
-      <MainPosts />
-    </div>
-  );
+  return <MainPosts />;
 }
