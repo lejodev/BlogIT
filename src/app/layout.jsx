@@ -3,6 +3,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import MyNavbar from "../../components/NavBar";
 // import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import { useEffect } from "react";
 import Footer from "../../components/Footer";
 
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
     <html>
       <body>
         <MyNavbar />
-        {children}
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         <Footer />
       </body>
     </html>
