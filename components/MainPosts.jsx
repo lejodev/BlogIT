@@ -18,8 +18,12 @@ export default function MainPosts() {
         const { data } = await getAllPosts();
 
 
+
+        console.log(data)
         setPosts(data);
       } catch (error) {
+        console.log(error)
+        console.log(posts)
         console.error("Error fetching posts:", error);
       }
     }
