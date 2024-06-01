@@ -17,14 +17,8 @@ export default function MainPosts() {
       try {
         const { data } = await getAllPosts();
 
-        const postsWithCovers = await Promise.all(
-          data.map(async (post) => {
-            const coverUrl = await getCover(post);
-            return { ...post, coverUrl };
-          })
-        );
 
-        setPosts(postsWithCovers);
+        setPosts(data);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
