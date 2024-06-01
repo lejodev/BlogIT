@@ -17,12 +17,15 @@ const Post = ({ id }) => {
       try {
         const post = await getSInglePost(id);
         setPost(post);
+        console.log("Post setted", post);
 
         const { name } = post.data.attributes.category.data.attributes;
         setName(name);
+        console.log("name setted", name);
 
         const postsByCategory = await getPostsByCategory(name);
         setPostsByCategory(postsByCategory);
+        console.log("PBC setted", postsByCategory);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -37,15 +40,20 @@ const Post = ({ id }) => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>*********THIS IS A FUCKING ERROR*********</div>;
   }
 
   if (post) {
+    console.log("THERE IS POST");
     const { id: postId } = post.data;
+    console.log("DATA");
     const { title, content } = post.data.attributes;
+    console.log("TITLE AND CONTENT");
     const { username } =
       post.data.attributes.users_permissions_user.data.attributes;
-    const { url } = post.data.attributes.coverImage.data.attributes;
+    console.log("USERNAME");
+    const  url  = post.data.attributes.coverImage.data.attributes.url;
+    console.log("id", id, "title", title, "content", "username", username);
 
     return (
       <Container className="d-flex flex-column align-items-center my-5">
@@ -54,7 +62,7 @@ const Post = ({ id }) => {
             <Card className="mb-4 shadow-sm border-0">
               <Card.Img
                 variant="top"
-                src={`${API_URL}${url}`}
+                src={`${url}`}
                 alt="Cover image"
                 className="rounded-top"
                 style={{ maxHeight: "300px", objectFit: "cover" }}

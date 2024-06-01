@@ -18,7 +18,7 @@ export default function Grid(posts) {
             style={{ overflow: "hidden", height: "200px" }}
           >
             <Card.Img
-              src={`${API_URL}${post.attributes.coverImage.data.attributes.url}`}
+              src={`${post.attributes.coverImage.data.attributes.url}`}
               alt={`Post `}
               className="w-100 h-100"
               variant=""
@@ -27,7 +27,7 @@ export default function Grid(posts) {
             <div
               className="position-absolute w-100 h-100"
               style={{
-                backgroundImage: `url(${API_URL}${post.attributes.coverImage.data.attributes.url})`,
+                backgroundImage: `url(${post.attributes.coverImage.data.attributes.url})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 filter: "blur(20px)",
