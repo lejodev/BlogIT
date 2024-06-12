@@ -14,7 +14,7 @@ const Register = () => {
     try {
       const registeredUser = await registerUser(data);
       setUser(registeredUser);
-      console.log("USER SET SUCCESSFULLY", user);
+      console.log("USER SET SUCCESSFULLY", registeredUser);
     } catch (error) {
       console.error("error:::", error);
     }
