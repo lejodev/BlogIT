@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../src/app/config";
+import Link from "next/link";
+
+import { Form, Button, Container } from "react-bootstrap";
 
 import { registerUser } from "../src/app/services/users";
 
@@ -16,7 +19,8 @@ const Register = () => {
       setUser(registeredUser);
       console.log("USER SET SUCCESSFULLY", registeredUser);
     } catch (error) {
-      console.error("error:::", error);
+      console.error("error:::", error.message);
+      alert(error.message);
     }
   }
 
@@ -26,27 +30,41 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="username">userName</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          onChange={handleChange}
-        />
-        <label htmlFor="email">email</label>
-        <input type="email" name="email" id="email" onChange={handleChange} />
-        <label htmlFor="password">password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={handleChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <Container>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label htmlFor="username">userName</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+            id="username"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="email">email</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            id="email"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="password">password</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            id="password"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button type="submit">Submit</Button>
+      </Form>
+      <span>
+        Already have an account? <Link href="/login">Login</Link>
+      </span>
+    </Container>
   );
 };
 

@@ -24,6 +24,9 @@ function BasicExample() {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
+        <Nav>
+          <Nav.Link href="/login">Sign in</Nav.Link>
+        </Nav>
       </Container>
     </Navbar>
   );
