@@ -1,32 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parse } from "cookie";
 
-export async function middleware(req) {
-  // const currentUser = req.cookies.get("next-auth.session-token");
-  // console.log("currentUser", currentUser);
-  // const session = req;
-  // console.log("FUCCKING SESSION", session);
+export async function handleToken() {
+  // const token =
+}
 
-  if (currentUser) {
-    console.log("With cookie");
-    const url = req.nextUrl.clone();
-    url.pathname = "/";
-    // const userType = JSON.parse(currentUser.value);
-    // console.log(userType)
-    // console.log(
-    //   "==================================userType==================================",
-    //   userType
-    // );
-    return NextResponse.redirect(url);
-  } else {
-    console.log("Without cookie");
-    const url = req.nextUrl.clone();
-    url.pathname = "/api/auth/signin";
-    // return NextResponse.rewrite(url);
-    return NextResponse.redirect(url);
+export async function middleware(req) {
+  const token = req.cookies.get("token")?.value;
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", req.url));
   }
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/company", "/create"],
+  matcher: [
+    // "/company",
+    "/create",
+  ],
 };

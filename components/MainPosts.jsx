@@ -44,10 +44,6 @@ export default function MainPosts() {
       <Container className="d-flex justify-content-center my-5">
         <Row className="d-flex flex-column w-100">
           {posts.map(({ id, attributes, coverUrl }) => {
-            console.log(
-              "******************* IMAGE *******************",
-              `${attributes.coverImage.data.attributes.url}`
-            );
             return (
               <Col key={id} md={12} className="mb-4">
                 <Link href={`/posts/${id}`} style={{ textDecoration: "none" }}>
@@ -85,7 +81,10 @@ export default function MainPosts() {
                     >
                       <Card.Img
                         src={`${attributes.coverImage.data.attributes.url}`}
-                        alt={`${attributes.coverImage.data.attributes.url}`}
+                        alt={`${
+                          attributes.coverImage.data.attributes.url ||
+                          "Banner image"
+                        }`}
                         className="w-100 h-100"
                         style={{ objectFit: "cover" }}
                       />

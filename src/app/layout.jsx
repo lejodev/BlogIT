@@ -6,6 +6,7 @@ import MyNavbar from "../../components/NavBar";
 import { Suspense } from "react";
 import { useEffect } from "react";
 import Footer from "../../components/Footer";
+import { CookiesProvider } from "react-cookie";
 
 // export const metadata = {
 //   title: "BlogIT",
@@ -17,12 +18,14 @@ export default function RootLayout({ children }) {
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
   return (
-    <html>
-      <body>
-        <MyNavbar />
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-        <Footer />
-      </body>
-    </html>
+    <CookiesProvider>
+      <html>
+        <body>
+          <MyNavbar />
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <Footer />
+        </body>
+      </html>
+    </CookiesProvider>
   );
 }
