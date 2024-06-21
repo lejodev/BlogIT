@@ -1,5 +1,6 @@
 import { API_URL, COVER_URL, POSTS_URL } from "../config";
-import Cookies from "js-cookie";
+import { getUserCookie } from "@/utils/auth";
+import { jwtDecode } from "jwt-decode";
 
 const postsDetail =
   "?populate[users_permissions_user][fields][0]=username&populate[category][fields][0]=name&populate[coverImage][fields][0]=url";
@@ -9,7 +10,7 @@ export async function getAllPosts() {
     const endpoint = `${POSTS_URL}?${COVER_URL}`;
     const res = await fetch(endpoint);
     if (!res.ok) {
-      console.log(res)
+      console.log(res);
       throw new Error(res || "Error getting all the posts");
     }
     const posts = await res.json();
@@ -49,14 +50,19 @@ export async function getPostsByCategory(category) {
 export async function createPost({
   title,
   content,
+  coverImage,
   users_permissions_user,
   category,
 }) {
   try {
-    const token = Cookies.get("token");
+    const token = getUserCookie("token");
     if (!token) {
       throw new Error("No cookie set");
     }
+
+    const decodedUser = jwtDecode(token);
+    console.log("TOKEN", decodedUser);
+
     const res = await fetch(`${API_URL}/api/blogs`, {
       method: "POST",
       headers: {
@@ -67,7 +73,8 @@ export async function createPost({
         data: {
           title,
           content,
-          users_permissions_user: [24],
+          coverImage,
+          users_permissions_user: [decodedUser.id],
           category: [category],
         },
       }),
@@ -84,3 +91,65 @@ export async function createPost({
     throw error;
   }
 }
+
+export async function uploadImageToCloudinary(imageFile) {
+  console.log(imageFile);
+
+  const formdata = new FormData();
+
+  formdata.append("file", imageFile);
+  formdata.append("upload_preset", "ml_default");
+
+  console.log(formdata);
+
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/dzxc4hipo/image/upload`,
+    { method: "POST", body: formdata }
+  );
+  if (!res.ok) {
+    return;
+  }
+  const data = await res.json();
+  console.log("DATA", data.secure_url);
+  return data;
+}
+
+export async function strapiFileEntry(imageData) {
+  const { public_id, secure_url, format } = imageData;
+  
+  // Fetch the image from the URL and convert it to a Blob
+  const response = await fetch(secure_url);
+  const blob = await response.blob();
+  
+  // Create a File object from the Blob
+  const file = new File([blob], public_id, { type: blob.type });
+
+  const formData = new FormData();
+  formData.append("files", file); // Actual file object
+  // formData.append("refId", 24); // Reference ID for the related content
+  formData.append("ref", "api::blog.blog"); // The name of the model the entry is for (e.g., 'post')
+  formData.append("field", "coverImage");
+
+  const token = getUserCookie("token");
+  if (!token) {
+    throw new Error("No cookie set");
+  }
+
+  const res = await fetch(`${API_URL}/api/upload`, {
+    headers: {
+      // Do not set Content-Type header manually
+      Authorization: `Bearer ${token}`,
+    },
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await res.json();
+  console.log("data", data);
+  if (!res.ok) {
+    console.log("ERROR=====", res);
+    throw new Error("failed to load entry");
+  }
+  return data[0];
+}
+

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Form, Button, Container } from "react-bootstrap";
 import { loginUser } from "../src/app/services/users";
-import { useCookies } from "react-cookie";
+import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { redirect } from "next/navigation";
 
 const Login = () => {
   const [data, setData] = useState({ identifier: "", password: "" });
   const [error, setError] = useState(null); // Add state for error handling
+  const router = new useRouter();
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -19,7 +20,7 @@ const Login = () => {
       const loggedInUser = await loginUser(data);
       console.log("USER LOGGED IN SUCCESSFULLY", loggedInUser.jwt);
       setCookie("token", loggedInUser.jwt);
-      redirect("/create");
+      router.push("/create");
     } catch (error) {
       setError(error.message); // Capture the error message
       console.error("Error:::", error.message);

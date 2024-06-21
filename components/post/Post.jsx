@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { API_URL } from "@/app/config";
 import { getSInglePost, getPostsByCategory } from "@/app/services/posts";
-import Grid from "../components/PostsGrid";
+import Grid from "../PostsGrid"
 
 const Post = ({ id }) => {
   const [post, setPost] = useState(null);
