@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { API_URL } from "@/app/config";
 import { getSInglePost, getPostsByCategory } from "@/app/services/posts";
-import Grid from "../PostsGrid"
+import Grid from "../PostsGrid";
 
 const Post = ({ id }) => {
   const [post, setPost] = useState(null);
@@ -52,8 +52,10 @@ const Post = ({ id }) => {
     const { username } =
       post.data.attributes.users_permissions_user.data.attributes;
     console.log("USERNAME");
-    const  url  = post.data.attributes.coverImage.data.attributes.url;
+    const url = post.data.attributes.coverImage.data.attributes.url;
     console.log("id", id, "title", title, "content", "username", username);
+    const comments = post.data.attributes.comments.data;
+    console.log(comments);
 
     return (
       <Container className="d-flex flex-column align-items-center my-5">
@@ -73,6 +75,20 @@ const Post = ({ id }) => {
                 <div className="text-muted">ID: {postId}</div>
                 <div className="text-muted">Username: {username}</div>
                 <div className="text-muted">Category: {name}</div>
+              </Card.Body>
+              <Card.Body>
+                {comments.map((comment) => (
+                  <div key={comment.id}>
+                    {
+                      <div>
+                        <h6>
+                          {comment.attributes.user.data.attributes.username}
+                        </h6>
+                        <p>{comment.attributes.text}</p>
+                      </div>
+                    }
+                  </div>
+                ))}
               </Card.Body>
             </Card>
           </Col>

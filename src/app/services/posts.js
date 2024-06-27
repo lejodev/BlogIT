@@ -3,7 +3,7 @@ import { getUserCookie } from "@/utils/auth";
 import { jwtDecode } from "jwt-decode";
 
 const postsDetail =
-  "?populate[users_permissions_user][fields][0]=username&populate[category][fields][0]=name&populate[coverImage][fields][0]=url";
+  "?populate[users_permissions_user][fields][0]=username&populate[category][fields][0]=name&populate[coverImage][fields][0]=url&populate[comments][populate][0]=user";
 
 export async function getAllPosts() {
   try {
