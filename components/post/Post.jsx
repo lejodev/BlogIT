@@ -76,20 +76,27 @@ const Post = ({ id }) => {
                 <div className="text-muted">Username: {username}</div>
                 <div className="text-muted">Category: {name}</div>
               </Card.Body>
-              <Card.Body>
-                {comments.map((comment) => (
-                  <div key={comment.id}>
-                    {
-                      <div>
-                        <h6>
-                          {comment.attributes.user.data.attributes.username}
-                        </h6>
-                        <p>{comment.attributes.text}</p>
+              {comments.length > 0 ? (
+                <>
+                  <Card.Header>Comments</Card.Header>
+                  <Card.Body>
+                    {comments.map((comment) => (
+                      <div key={comment.id}>
+                        {
+                          <div>
+                            <h6>
+                              {comment.attributes.user.data.attributes.username}
+                            </h6>
+                            <p>{comment.attributes.text}</p>
+                          </div>
+                        }
                       </div>
-                    }
-                  </div>
-                ))}
-              </Card.Body>
+                    ))}
+                  </Card.Body>
+                </>
+              ) : (
+                ""
+              )}
             </Card>
           </Col>
         </Row>

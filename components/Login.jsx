@@ -7,8 +7,11 @@ import { loginUser } from "../src/app/services/users";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { redirect } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../src/redux/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [data, setData] = useState({ identifier: "", password: "" });
   const [error, setError] = useState(null); // Add state for error handling
   const router = new useRouter();
@@ -18,8 +21,8 @@ const Login = () => {
     setError(null); // Reset error state before making the request
     try {
       const loggedInUser = await loginUser(data);
-      console.log("USER LOGGED IN SUCCESSFULLY", loggedInUser.jwt);
-      setCookie("token", loggedInUser.jwt);
+      localStorage.setItem("user", JSON.stringify(loggedInUser));
+      dispatch(setUser(loggedInUser));
       router.push("/create");
     } catch (error) {
       setError(error.message); // Capture the error message
