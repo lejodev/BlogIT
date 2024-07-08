@@ -4,6 +4,9 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { API_URL } from "@/app/config";
 import { getSInglePost, getPostsByCategory } from "@/app/services/posts";
 import Grid from "../PostsGrid";
+import { useSelector } from "react-redux";
+
+import PostComment from "./PostComment";
 
 const Post = ({ id }) => {
   const [post, setPost] = useState(null);
@@ -11,6 +14,9 @@ const Post = ({ id }) => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const user = useSelector((state) => state.user.user);
+  console.log("UUSSEERR::", user);
 
   useEffect(() => {
     async function getData() {
@@ -76,6 +82,7 @@ const Post = ({ id }) => {
                 <div className="text-muted">Username: {username}</div>
                 <div className="text-muted">Category: {name}</div>
               </Card.Body>
+              {user ? <PostComment payloadInfo={{ user, postId }} /> : null}
               {comments.length > 0 ? (
                 <>
                   <Card.Header>Comments</Card.Header>
