@@ -6,7 +6,8 @@ import { getSInglePost, getPostsByCategory } from "@/app/services/posts";
 import Grid from "../PostsGrid";
 import { useSelector } from "react-redux";
 
-import PostComment from "./PostComment";
+import PostComment from "../comments/PostComment";
+import Comments from "../comments/Comments";
 
 const Post = ({ id }) => {
   const [post, setPost] = useState(null);
@@ -82,28 +83,9 @@ const Post = ({ id }) => {
                 <div className="text-muted">Username: {username}</div>
                 <div className="text-muted">Category: {name}</div>
               </Card.Body>
+              <Card.Header>Comments</Card.Header>
+              {comments.length > 0 ? <Comments propsComments={comments} /> : ""}
               {user ? <PostComment payloadInfo={{ user, postId }} /> : null}
-              {comments.length > 0 ? (
-                <>
-                  <Card.Header>Comments</Card.Header>
-                  <Card.Body>
-                    {comments.map((comment) => (
-                      <div key={comment.id}>
-                        {
-                          <div>
-                            <h6>
-                              {comment.attributes.user.data.attributes.username}
-                            </h6>
-                            <p>{comment.attributes.text}</p>
-                          </div>
-                        }
-                      </div>
-                    ))}
-                  </Card.Body>
-                </>
-              ) : (
-                ""
-              )}
             </Card>
           </Col>
         </Row>

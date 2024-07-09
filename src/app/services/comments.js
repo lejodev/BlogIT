@@ -35,3 +35,27 @@ export async function postComment({ text, user, postId }) {
     throw error; // Rethrow the error to allow the caller to handle it
   }
 }
+
+export async function deleteComment(token, commentId) {
+  console.log(token, commentId);
+  try {
+    const res = await fetch(`${API_URL}/api/comments/${commentId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      const message = `Error: ${res.statusText}`;
+      console.log(message);
+      throw new Error(message);
+    }
+
+    const deleted = res.json();
+    return deleted;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
