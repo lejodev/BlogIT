@@ -63,7 +63,7 @@ function NavBar() {
             {user ? (
               <>
                 <Nav.Link href="/newPost" className="text-dark">
-                  <FaPlusSquare className="me-1" /> cerete
+                  <FaPlusSquare className="me-1" /> Create
                 </Nav.Link>
                 <Nav.Link href="/user" className="text-dark">
                   <FaUser className="me-1" /> {user.user.username}
