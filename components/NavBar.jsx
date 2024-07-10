@@ -15,14 +15,8 @@ import { useSelector } from "react-redux";
 
 function NavBar() {
   const user = useSelector((state) => state.user.user);
-  const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    function hasToken() {
-      return Cookies.get("token") ? true : false;
-    }
-    setAuthenticated(hasToken());
-  }, []);
+  
+  console.log("MALPARIDO USUARIO", user)
 
   return (
     <Navbar expand="lg" className="bg-light navbar-light">
@@ -68,8 +62,8 @@ function NavBar() {
           <Nav>
             {user ? (
               <>
-                <Nav.Link href="/create" className="text-dark">
-                  <FaPlusSquare className="me-1" /> Create
+                <Nav.Link href="/newPost" className="text-dark">
+                  <FaPlusSquare className="me-1" /> cerete
                 </Nav.Link>
                 <Nav.Link href="/user" className="text-dark">
                   <FaUser className="me-1" /> {user.user.username}

@@ -55,19 +55,20 @@ export async function createPost({
   category,
 }) {
   try {
-    const token = getUserCookie("token");
+    const token = JSON.parse(localStorage.getItem("user"))
+    console.log("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR", token)
     if (!token) {
       throw new Error("No cookie set");
     }
 
-    const decodedUser = jwtDecode(token);
+    const decodedUser = jwtDecode(token.jwt);
     console.log("TOKEN", decodedUser);
 
     const res = await fetch(`${API_URL}/api/blogs`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token.jwt}`,
       },
       body: JSON.stringify({
         data: {
@@ -130,7 +131,7 @@ export async function strapiFileEntry(imageData) {
   formData.append("ref", "api::blog.blog"); // The name of the model the entry is for (e.g., 'post')
   formData.append("field", "coverImage");
 
-  const token = getUserCookie("token");
+  const token = JSON.parse(localStorage.getItem("user"))
   if (!token) {
     throw new Error("No cookie set");
   }
@@ -138,14 +139,15 @@ export async function strapiFileEntry(imageData) {
   const res = await fetch(`${API_URL}/api/upload`, {
     headers: {
       // Do not set Content-Type header manually
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.jwt}`,
     },
     method: "POST",
     body: formData,
   });
 
   const data = await res.json();
-  console.log("data", data);
+  console.log("data*-**//*/*/***/", data);
+  console.log(token)
   if (!res.ok) {
     console.log("ERROR=====", res);
     throw new Error("failed to load entry");
