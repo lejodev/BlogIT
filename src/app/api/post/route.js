@@ -25,13 +25,11 @@ export async function POST(req, { params }) {
     const post = await req.json();
     const mongoosePost = new Post(post);
     const savePost = await mongoosePost.save();
-    console.log(savePost);
     return NextResponse.json(
       { message: "Post created succeessfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ Message: "CARECHIMBA" }, { status: 400 });
   }
 }

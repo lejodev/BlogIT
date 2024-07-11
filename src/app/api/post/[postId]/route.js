@@ -6,10 +6,8 @@ export async function DELETE(req, { params }) {
     try {
         databaseConnect()
         const postId = params.postId;
-        console.log(postId)
         const deletePost = await Post.findByIdAndDelete(postId)
         if (deletePost) {
-            console.log(deletePost)
             return NextResponse.json({ "Message": "Post deleted successfuly" })
         } else {
             return NextResponse.json({ "Error": "Problem deleteing post" })
@@ -25,7 +23,6 @@ export async function PATCH(req, { params }) {
         const postId = params.postId;
         const newPost = await req.json()
         const updatePost = await Post.findByIdAndUpdate(postId, newPost, { new: true })
-        // console.log(updatePost)
         if (updatePost) {
             return NextResponse.json({
                 Message: "Post updated successfully",

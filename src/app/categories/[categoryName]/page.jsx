@@ -7,7 +7,6 @@ import { Container } from "react-bootstrap";
 const category = async ({ params }) => {
   const category = params.categoryName;
   const posts = await getPostsByCategory(category);
-  console.log(`POSTSS BY ${category}`, posts);
   return (
     <Container className="d-flex flex-column align-items-center my-5">
       <h4>{category}</h4>

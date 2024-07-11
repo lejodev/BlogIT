@@ -15,8 +15,6 @@ import { useSelector } from "react-redux";
 
 function NavBar() {
   const user = useSelector((state) => state.user.user);
-  
-  console.log("MALPARIDO USUARIO", user)
 
   return (
     <Navbar expand="lg" className="bg-light navbar-light">

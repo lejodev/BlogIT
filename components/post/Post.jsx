@@ -17,22 +17,18 @@ const Post = ({ id }) => {
   const [error, setError] = useState(null);
 
   const user = useSelector((state) => state.user.user);
-  console.log("UUSSEERR::", user);
 
   useEffect(() => {
     async function getData() {
       try {
         const post = await getSInglePost(id);
         setPost(post);
-        console.log("Post setted", post);
 
         const { name } = post.data.attributes.category.data.attributes;
         setName(name);
-        console.log("name setted", name);
 
         const postsByCategory = await getPostsByCategory(name);
         setPostsByCategory(postsByCategory);
-        console.log("PBC setted", postsByCategory);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -47,25 +43,20 @@ const Post = ({ id }) => {
   }
 
   if (error) {
-    return <div>*********THIS IS A FUCKING ERROR*********</div>;
+    return <div>{error}</div>;
   }
 
   if (post) {
-    console.log("THERE IS POST");
     const { id: postId } = post.data;
-    console.log("DATA");
     const { title, content } = post.data.attributes;
-    console.log("TITLE AND CONTENT");
     const { username } =
       post.data.attributes.users_permissions_user.data.attributes;
-    console.log("USERNAME");
     const url = post.data.attributes.coverImage.data.attributes.url;
-    console.log("id", id, "title", title, "content", "username", username);
     const comments = post.data.attributes.comments.data;
-    console.log(comments);
 
     return (
       <Container className="d-flex flex-column align-items-center my-5">
+        {id === user.user.id ? <>DELETE</> : ""}
         <Row className="justify-content-center w-100">
           <Col md={8}>
             <Card className="mb-4 shadow-sm border-0">

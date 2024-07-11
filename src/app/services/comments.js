@@ -37,7 +37,6 @@ export async function postComment({ text, user, postId }) {
 }
 
 export async function deleteComment(token, commentId) {
-  console.log(token, commentId);
   try {
     const res = await fetch(`${API_URL}/api/comments/${commentId}`, {
       headers: {
@@ -48,7 +47,6 @@ export async function deleteComment(token, commentId) {
 
     if (!res.ok) {
       const message = `Error: ${res.statusText}`;
-      console.log(message);
       throw new Error(message);
     }
 

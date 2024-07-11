@@ -7,7 +7,6 @@ export async function GET(req, { params }) {
     databaseConnect();
     const userId = params.userId;
     const user = await User.findById(userId);
-    console.log(user);
     if (user) {
       return NextResponse.json({ user }, { status: 200 });
     } else {

@@ -18,9 +18,7 @@ const PostComment = ({ payloadInfo }) => {
       user: payloadInfo.user,
       postId: payloadInfo.postId,
     };
-    console.log("comment", payload);
     const response = await postComment(payload);
-    console.log(response);
     setComment("");
   };
 

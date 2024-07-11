@@ -10,6 +10,7 @@ const PostComments = ({ propsComments }) => {
   const user = useSelector((state) => state.user.user);
 
   const handleDelete = async (commentId) => {
+    // This function should be part of Utils
     try {
       await deleteComment(user.jwt, commentId);
       setComments(comments.filter((comment) => comment.id !== commentId));

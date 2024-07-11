@@ -1,7 +1,6 @@
 import { API_URL } from "../config";
 
 export async function registerUser({ username, email, password }) {
-  console.log("username, email, password", username, email, password);
   try {
     const response = await fetch(`${API_URL}/api/auth/local/register`, {
       method: "POST",
@@ -24,7 +23,6 @@ export async function registerUser({ username, email, password }) {
       console.error("Error while registering:", data);
       throw new Error(data.error.message || "Error while registering");
     } else {
-      console.log("***************", data);
       return data;
     }
   } catch (error) {
@@ -50,7 +48,6 @@ export async function loginUser({ identifier, password }) {
         console.error("Error Response:", errorMessage);
         throw new Error(errorMessage);
       }
-      console.log("LOGGED IN SUCCESSFULLY", data);
       return data;
     } catch (error) {
       console.error("Error while logging in:", error.message || error);

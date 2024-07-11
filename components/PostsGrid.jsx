@@ -6,9 +6,7 @@ import { API_URL } from "@/app/config";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
 export default function Grid(posts) {
-  console.log("*****POSTS*****", posts);
   return posts.posts.data.map((post) => {
-    console.log("PPOOSSTT", post.id);
     return (
       <Col md={4} className="mb-4" key={post.id}>
         <Link href={`/posts/${post.id}`}>

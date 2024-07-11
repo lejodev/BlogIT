@@ -15,9 +15,7 @@ const CreatePost = () => {
     async function fetchCategories() {
       try {
         const userToken = getUserCookie("token");
-        console.log("USER TOKEN", userToken);
       } catch (error) {
-        console.log(error);
         console.error("Error getting token:", error);
       }
       try {
@@ -42,7 +40,6 @@ const CreatePost = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(data);
 
     // Get the war image response from sloudinary
     const cloudinaryImage = await uploadImageToCloudinary(data.coverImage);
@@ -51,17 +48,12 @@ const CreatePost = () => {
     // This function associates strapi with the image stores in cloudinary. And creates a Standard to be "uploadable" to strapi
     const imageStrapiEntry = await strapiFileEntry(cloudinaryImage);
 
-    console.log("***********************************", imageStrapiEntry);
-
-    console.log("cloudinaryImage", cloudinaryImage);
-
     const postData = {
       title: data.title,
       content: data.content,
       coverImage: imageStrapiEntry,
       category: data.category,
     };
-    console.log("categories", categories.data);
     createPost(postData);
     setSuccessful(true);
   }
@@ -69,7 +61,6 @@ const CreatePost = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name == "coverImage") {
-      console.log("COVERIMAGE", files);
       setData({ ...data, [name]: files[0] });
     } else {
       setData({ ...data, [name]: value });
