@@ -56,6 +56,7 @@ const CreatePost = () => {
     };
     createPost(postData);
     setSuccessful(true);
+    alert("Success")
   }
 
   const handleChange = (e) => {

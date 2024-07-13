@@ -44,8 +44,7 @@ export async function getPostsByCategory(category) {
     }
     const categories = await res.json();
     return categories;
-  } catch (error) {
-  }
+  } catch (error) {}
 }
 
 export async function createPost({
@@ -109,7 +108,6 @@ export async function deletePost(postId, userToken) {
 }
 
 export async function uploadImageToCloudinary(imageFile) {
-
   const formdata = new FormData();
 
   formdata.append("file", imageFile);
@@ -161,4 +159,31 @@ export async function strapiFileEntry(imageData) {
     throw new Error("failed to load entry");
   }
   return data[0];
+}
+
+export async function editPost({ title, content, tmpId }, userToken) {
+  try {
+    const body = JSON.stringify({ data: { title: title, content: content } });
+    const token = userToken;
+    const res = await fetch(`${POSTS_URL}/${tmpId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: body,
+    });
+    console.log(res);
+
+    if (!res.ok) {
+      const message = res.statusText;
+      throw new Error(message);
+    }
+
+    const updatedPost = await res.json();
+    console.log("updatedPost", updatedPost);
+    return updatedPost;
+  } catch (error) {
+    console.error(error);
+  }
 }
