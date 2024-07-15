@@ -36,6 +36,31 @@ export async function postComment({ text, user, postId }) {
   }
 }
 
+export async function editComment({text}, jwt) {
+  try {
+    if (!text || !jwt) {
+      throw new Error("Comment text is empty token not provided ");
+    }
+
+    const res = fetch(`${API_URL}/api/comments/${text.id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      method: "PUT",
+      body: JSON.stringify(text),
+    });
+
+    const editedComment = await res.json();
+    if (!res.ok) {
+      throw new Error((await res).statusText);
+    }
+    return editComment;
+  } catch (error) {
+    console.error(`Error while editing comment ${error}`);
+  }
+}
+
 export async function deleteComment(token, commentId) {
   try {
     const res = await fetch(`${API_URL}/api/comments/${commentId}`, {
