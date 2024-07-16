@@ -173,7 +173,6 @@ export async function editPost({ title, content, tmpId }, userToken) {
       method: "PUT",
       body: body,
     });
-    console.log(res);
 
     if (!res.ok) {
       const message = res.statusText;
@@ -181,7 +180,6 @@ export async function editPost({ title, content, tmpId }, userToken) {
     }
 
     const updatedPost = await res.json();
-    console.log("updatedPost", updatedPost);
     return updatedPost;
   } catch (error) {
     console.error(error);

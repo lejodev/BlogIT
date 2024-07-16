@@ -36,26 +36,26 @@ export async function postComment({ text, user, postId }) {
   }
 }
 
-export async function editComment({text}, jwt) {
+export async function editComment({ text, id }, jwt) {
   try {
     if (!text || !jwt) {
-      throw new Error("Comment text is empty token not provided ");
+      throw new Error("Comment text is empty token not provided " + text + jwt);
     }
 
-    const res = fetch(`${API_URL}/api/comments/${text.id}`, {
+    const res = await fetch(`${API_URL}/api/comments/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
       },
       method: "PUT",
-      body: JSON.stringify(text),
+      body: JSON.stringify({ data: { text } }),
     });
 
     const editedComment = await res.json();
     if (!res.ok) {
       throw new Error((await res).statusText);
     }
-    return editComment;
+    return editedComment;
   } catch (error) {
     console.error(`Error while editing comment ${error}`);
   }

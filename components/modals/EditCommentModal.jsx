@@ -8,16 +8,12 @@ const EditCommentModal = ({ open, currentComment, onClose, onSave }) => {
   useEffect(() => {
     if (currentComment) {
       setComment(currentComment);
-      console.log("comment", comment);
-    } else {
-      console.log("NONE");
     }
   }, [currentComment]);
 
   async function handleChange(e) {
     const { name, value } = e.target;
     setComment({ ...comment, [name]: value });
-    console.log(comment);
   }
 
   async function handleSave(e) {

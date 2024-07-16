@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { deleteComment } from "@/app/services/comments";
+import { deleteComment, editComment } from "@/app/services/comments";
 
 import EditCommentModal from "../modals/EditCommentModal";
 
@@ -35,8 +35,9 @@ const PostComments = ({ propsComments }) => {
     setModalIsOpen(false);
   };
 
-  const handleSave = (editedComment) => {
-    console.log("editedComment", editedComment);
+  const handleSave = async (editedComment) => {
+    const edited = await editComment(editedComment, user.jwt);
+
     setComments(
       comments.map((currComment) =>
         currComment.id === editedComment.id
